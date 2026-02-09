@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusRide - Welcome</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+
+            background: url('images/img1.avif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* RAINBOW TITLE */
+        @keyframes rainbowBlink {
+            0%   { color: #ff0000; }
+            14%  { color: #ff7f00; }
+            28%  { color: #ffff00; }
+            42%  { color: #00ff00; }
+            57%  { color: #0000ff; }
+            71%  { color: #4b0082; }
+            85%  { color: #8f00ff; }
+            100% { color: #ff0000; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            width: 80%;
+            max-width: 850px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            animation: rainbowBlink 2s infinite linear;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+
+        .card-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+
+        /* ------------------------------------------------------ */
+        /* 🎯 PERFECT ANIMATED BORDER + FLIP EFFECT (FIXED VERSION) */
+        /* ------------------------------------------------------ */
+
+        /* OUTER BOX WITH ANIMATED BORDER */
+        .flip-box {
+            width: 180px;
+            height: 120px;
+            perspective: 1000px;
+            cursor: pointer;
+            position: relative;
+            border-radius: 20px;
+        }
+
+        /* Animated gradient border */
+        .flip-box::before {
+            content: "";
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(120deg, #001F54, #00509E, #00A6FB, #00509E, #001F54);
+            background-size: 300% 300%;
+            animation: flowBorder 6s linear infinite;
+            border-radius: 22px;
+            z-index: -1;
+        }
+
+        @keyframes flowBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* FLIP INNER WRAPPER */
+        .flip-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.6s ease;
+            transform-style: preserve-3d;
+            border-radius: 20px;
+        }
+
+        /* When flipping */
+        .flip-box.flip .flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* FRONT FACE */
+        .flip-front {
+            background: #B5D8FF;  /* sky-blue */
+            color: #0b3d91;
+            font-size: 1.3rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 20px;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+
+        /* BACK FACE (IMAGE) */
+        .flip-back {
+            transform: rotateY(180deg);
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+
+        /* ------------------------------------------------------ */
+        /* END OF FLIP + ANIMATED BORDER */
+        /* ------------------------------------------------------ */
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>CampusRide</h1>
+        <p>A Smart Vehicle Pooling System for Campus Commuters</p>
+
+        <div class="card-container">
+
+            <!-- LOGIN CARD -->
+            <div class="flip-box" id="loginCard" onclick="flipToPage('loginCard', 'login.html')">
+                <div class="flip-inner">
+                    <div class="flip-front">Login</div>
+                    <div class="flip-back" style="background-image: url('images/img2.jpg');"></div>
+                </div>
+            </div>
+
+            <!-- REGISTER CARD -->
+            <div class="flip-box" id="registerCard" onclick="flipToPage('registerCard', 'register.html')">
+                <div class="flip-inner">
+                    <div class="flip-front">Register</div>
+                    <div class="flip-back" style="background-image: url('images/img3.jpg');"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<script>
+function flipToPage(cardId, redirectPage) {
+    let card = document.getElementById(cardId);
+    card.classList.add("flip");
+    setTimeout(() => {
+        window.location.href = redirectPage;
+    }, 600);
+}
+</script>
+
+</body>
+</html>

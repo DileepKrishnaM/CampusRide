@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusRide - Login</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            background: #eef2f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 900px;
+            height: 520px;
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* LEFT SECTION */
+        .left {
+            width: 45%;
+            background: #0b3d91;
+            position: relative;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* FIXED DESCRIPTION */
+        .description-box {
+            padding: 15px;
+            z-index: 3;
+            position: relative;
+            background: #0b3d91;   /* solid background */
+        }
+
+        .description-box h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .description-box p {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            line-height: 20px;
+            opacity: 0.92;
+        }
+
+        /* SPACER BELOW DESCRIPTION */
+        .space-divider {
+            height: 20px;   /* adjust gap */
+            background: #0b3d91;
+            z-index: 2;
+        }
+
+        /* SLIDESHOW FIXED */
+        .slideshow {
+            position: absolute;
+            top: 120px; /* ensures images start BELOW the description */
+            left: 0;
+            width: 100%;
+            height: calc(100% - 120px);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .slideshow img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            animation: slideAnimation 12s infinite;
+        }
+
+        .slideshow img:nth-child(1) { animation-delay: 0s; }
+        .slideshow img:nth-child(2) { animation-delay: 4s; }
+        .slideshow img:nth-child(3) { animation-delay: 8s; }
+
+        @keyframes slideAnimation {
+            0% { opacity: 0; }
+            8% { opacity: 1; }
+            33% { opacity: 1; }
+            41% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* RIGHT SECTION */
+        .right {
+            width: 60%;
+            padding: 50px;
+        }
+
+        .right h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #0b3d91;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 20px;
+            border-radius: 6px;
+            border: 1px solid #d1d1d1;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0b3d91;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #0b3d91;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #092e70;
+        }
+
+        .footer-text {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer-text a {
+            color: #0b3d91;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- LEFT SIDE -->
+        <div class="left">
+
+            <div class="description-box">
+                <h1>CampusRide</h1>
+                <p>Smart commuting made easy. Share rides,  
+                save money, travel together.</p>
+            </div>
+
+            <!-- Extra space so text doesn't overlap images -->
+            <div class="space-divider"></div>
+
+            <!-- SLIDESHOW -->
+            <div class="slideshow">
+                <img src="images/needy1.jpg" alt="">
+                <img src="images/needy2.png" alt="">
+                <img src="images/needy3.avif" alt="">
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="right">
+            <h2>Login</h2>
+
+            <label>Email</label>
+            <input type="email" placeholder="Enter your email" required>
+
+            <label>Password</label>
+            <input type="password" placeholder="Enter your password" required>
+
+            <button class="btn">Login</button>
+
+            <div class="footer-text">
+                <a href="forgot-password.html">Forgot Password?</a> <br><br>
+                Don’t have an account? <a href="register.html">Create Account</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
