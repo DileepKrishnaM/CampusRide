@@ -81,4 +81,11 @@ public class VehicleService {
         vehicle.setStatus("REJECTED");
         return vehicleRepository.save(vehicle);
     }
+    
+    // Check if user has approved vehicle
+    public Vehicle getApprovedVehicleByEmail(String email) {
+        return vehicleRepository
+                .findByEmailAndStatus(email, "APPROVED")
+                .orElseThrow(() -> new RuntimeException("Vehicle not verified by admin"));
+    }
 }
