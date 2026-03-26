@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Admin Dashboard</title>
+  </head>
+  <body>
+    <h2>Pending Vehicle Requests</h2>
+
+    <div id="vehicleList"></div>
+  </body>
+  <script>
+    const adminEmail = localStorage.getItem("email");
+
+    async function loadVehicles() {
+      const response = await fetch(
+        `http://localhost:8081/api/admin/vehicles/pending?adminEmail=${adminEmail}`,
+      );
+
+      const vehicles = await response.json();
+
+      const container = document.getElementById("vehicleList");
+      container.innerHTML = "";
+      if (vehicles.length === 0) {
+        container.innerHTML = `
+            <div style="padding:20px; text-align:center; color:gray;">
+                <h3>No pending vehicles 🚗</h3>
+                <p>All vehicles are verified.</p>
+            </div>
+        `;
+        return;
+      }
+
+      vehicles.forEach((v) => {
+        container.innerHTML += `
+            <div style="
+        border:1px solid #ddd;
+        border-radius:10px;
+        padding:15px;
+        margin:15px;
+        box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+        <h3><b>Name:</b> ${v.name}</h3>
+        <p><b>Vehicle:</b> ${v.vehicleModel}</p>
+        <p><b>Number:</b> ${v.vehicleNumber}</p>
+
+        <div style="display:flex; gap:10px; margin-top:10px;">
+            <img src="http://localhost:8081/${v.collegeIdImage}" width="100">
+            <img src="http://localhost:8081/${v.licenseImage}" width="100">
+            <img src="http://localhost:8081/${v.rcImage}" width="100">
+        </div>
+
+        <div style="margin-top:10px;">
+            <button onclick="approve(${v.id})"
+                style="background-color:green; color:white; padding:8px 12px; border:none; border-radius:5px;">
+                Approve
+            </button>
+
+            <button onclick="reject(${v.id})"
+                style="background-color:red; color:white; padding:8px 12px; border:none; border-radius:5px; margin-left:10px;">
+                Reject
+            </button>
+        </div>
+    </div>
+`;
+      });
+    }
+
+    async function approve(id) {
+      await fetch(
+        `http://localhost:8081/api/admin/vehicle/${id}/approve?adminEmail=${adminEmail}`,
+        {
+          method: "PUT",
+        },
+      );
+      loadVehicles();
+    }
+
+    async function reject(id) {
+      await fetch(
+        `http://localhost:8081/api/admin/vehicle/${id}/reject?adminEmail=${adminEmail}`,
+        {
+          method: "PUT",
+        },
+      );
+      loadVehicles();
+    }
+
+    loadVehicles();
+  </script>
+</html>

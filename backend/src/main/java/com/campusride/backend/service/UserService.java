@@ -16,10 +16,12 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public User registerUser(User user) {
-
-        // Encrypt password
+    	
+    		if(userRepository.findByEmail(user.getEmail()).isPresent()){
+            throw new RuntimeException("Email already registered");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
+        user.setRole("USER");
         return userRepository.save(user);
     }
     
@@ -34,5 +36,9 @@ public class UserService {
 
         return user;
     }
-
+    
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
 }

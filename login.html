@@ -248,9 +248,15 @@
           });
 
           if (response.ok) {
+            const user = await response.json();
+            localStorage.setItem("email", user.email);
+            localStorage.setItem("role", user.role);
             alert("Login successful!");
-            // Later we will redirect to dashboard
-            window.location.href = "dashboard.html";
+            if (user.role === "ADMIN") {
+              window.location.href = "admin-dashboard.html";
+            } else {
+              window.location.href = "dashboard.html";
+            }
           } else {
             alert("Invalid email or password");
           }

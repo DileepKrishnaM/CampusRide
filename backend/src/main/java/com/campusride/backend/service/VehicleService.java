@@ -37,7 +37,7 @@ public class VehicleService {
 
         file.transferTo(destination);
 
-        return filePath;
+        return "uploads/" + folder + "/" + fileName;
     }
 
 
