@@ -214,7 +214,7 @@
         <ul>
           <li><a href="#" class="active">Home</a></li>
           <li><a href="#">My Trips</a></li>
-          <li><a href="#">Profile</a></li>
+          <li><a href="profile.html">Profile</a></li>
           <li>
             <button
               id="authBtn"
@@ -277,49 +277,34 @@
     </section>
   </body>
   <script>
-    if (!localStorage.getItem("role")) {
-        document.querySelectorAll(".protected").forEach((btn) => {
-        btn.style.opacity = "0.5";
-      });
-    }
     function goToVehicle() {
-      const role = localStorage.getItem("role");
-      if (!role) {
-        alert("Login required");
-        window.location.href = "login.html";
-        return;
-      }
+      if (!checkAuth()) return;
       window.location.href = "registervehicle.html";
     }
-    
+
     function goToOfferRide() {
-      const role = localStorage.getItem("role");
-      if (!role) {
-        alert("Login required");
-        window.location.href = "login.html";
-        return;
-      }
+      if (!checkAuth()) return;
       window.location.href = "offerride.html";
     }
-    
+
     function goToRequestRide() {
-      const role = localStorage.getItem("role");
-      if (!role) {
-        alert("Login required");
-        window.location.href = "login.html";
-        return;
-      }
+      if (!checkAuth()) return;
       window.location.href = "requestride.html";
     }
-    
+
     function goToViewStatus() {
+      if (!checkAuth()) return;
+      window.location.href = "viewstatus.html";
+    }
+
+    function checkAuth() {
       const role = localStorage.getItem("role");
       if (!role) {
         alert("Login required");
         window.location.href = "login.html";
-        return;
+        return false;
       }
-      window.location.href = "viewstatus.html";
+      return true;
     }
 
     function updateAuthButton() {

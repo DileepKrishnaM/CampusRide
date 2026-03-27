@@ -229,6 +229,14 @@
       </div>
     </div>
     <script>
+      if (localStorage.getItem("role")) {
+        if (localStorage.getItem("role") === "ADMIN") {
+          window.location.href = "admin-dashboard.html";
+        } else {
+          window.location.href = "dashboard.html";
+        }
+      }
+
       document
         .getElementById("loginForm")
         .addEventListener("submit", async function (e) {
