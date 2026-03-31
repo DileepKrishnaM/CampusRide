@@ -235,10 +235,14 @@
       async function requestRide(rideId, btn) {
         const email = localStorage.getItem("email");
 
-        await fetch(
+        const res = await fetch(
           `http://localhost:8081/api/ride-request/request?rideId=${rideId}&email=${email}`,
           { method: "POST" },
         );
+        if (!res.ok) {
+          alert("Request failed : " + (await res.text()));
+          return;
+        }
 
         btn.innerText = "Requested";
         btn.disabled = true;

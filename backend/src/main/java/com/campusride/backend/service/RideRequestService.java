@@ -27,6 +27,21 @@ public class RideRequestService {
 
     // Request Ride
     public RideRequest requestRide(Long rideId, String email) {
+    		Ride ride = rideRepository.findById(rideId)
+                .orElseThrow(() -> new RuntimeException("Ride not found"));
+
+        // 🚫 Prevent request if no seats
+        if (ride.getSeatsAvailable() <= 0) {
+            throw new RuntimeException("No seats available for this ride");
+        }
+
+        // 🚫 Prevent duplicate request
+        boolean alreadyRequested = rideRequestRepository
+                .existsByRideIdAndPassengerEmail(rideId, email);
+
+        if (alreadyRequested) {
+            throw new RuntimeException("You have already requested this ride");
+        }
         RideRequest req = new RideRequest();
         req.setRideId(rideId);
         req.setPassengerEmail(email);
