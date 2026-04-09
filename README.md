@@ -73,9 +73,9 @@ CampusRide is a smart vehicle pooling system designed to help students and emplo
 2. Configure MySQL in:
 application.properties
 3. Run:
-BackendApplication.java
-Backend runs at:
-http://localhost:8081
+   BackendApplication.java
+   Backend runs at:
+   https://campusride-backend-p321.onrender.com
 
 ---
 

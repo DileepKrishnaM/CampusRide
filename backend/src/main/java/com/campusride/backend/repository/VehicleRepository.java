@@ -1,7 +1,6 @@
 package com.campusride.backend.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -17,5 +16,5 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     // ✅ NEW: Get all vehicles of a user (for profile page)
     List<Vehicle> findByEmail(String email);
 
-    Optional<Vehicle> findByVehicleNumber(String vehicleNumber);
+    Vehicle findByVehicleNumber(String vehicleNumber);
 }

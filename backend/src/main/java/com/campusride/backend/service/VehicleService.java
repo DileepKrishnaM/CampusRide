@@ -98,7 +98,9 @@ public class VehicleService {
     }
 
     public Vehicle getVehicleByNumber(String vehicleNumber) {
-        return vehicleRepository.findByVehicleNumber(vehicleNumber)
-                .orElseThrow(() -> new RuntimeException("Vehicle not found"));
+        Vehicle vehicle =  vehicleRepository.findByVehicleNumber(vehicleNumber);
+        	if(vehicle==null) return null;
+        	else if(vehicle!=null) return vehicle;
+        	else throw new RuntimeException("Vehicle not found");
     }
 }

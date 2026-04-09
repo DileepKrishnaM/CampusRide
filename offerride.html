@@ -143,7 +143,7 @@
       <h2>Offer a Ride</h2>
 
       <form id="rideForm">
-        <label>Source</label>
+        <label>Starting Point</label>
         <input type="text" id="source" required />
 
         <label>Destination</label>
@@ -170,7 +170,7 @@
       if (!role) {
         alert("Login required");
         window.location.href = "login.html";
-      } 
+      }
       function logout() {
         localStorage.clear();
         window.location.href = "login.html";

@@ -166,7 +166,7 @@
     }
 
     async function approve(id) {
-      await fetch(
+      const response = await fetch(
         `https://campusride-backend-p321.onrender.com/api/admin/vehicle/${id}/approve?adminEmail=${adminEmail}`,
         {
           method: "PUT",
@@ -177,16 +177,23 @@
         alert("Approval Failed: " + text);
         return;
       }
+      alert("Vehicle Approved!");
       loadVehicles();
     }
 
     async function reject(id) {
-      await fetch(
+      const response = await fetch(
         `https://campusride-backend-p321.onrender.com/api/admin/vehicle/${id}/reject?adminEmail=${adminEmail}`,
         {
           method: "PUT",
         },
       );
+      const text = await response.text();
+      if (!response.ok) {
+        alert("Rejection Failed: " + text);
+        return;
+      }
+      alert("Vehicle Rejected!");
       loadVehicles();
     }
 
